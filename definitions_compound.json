@@ -10,7 +10,7 @@
       },
       "journey_time": {
           "crisp_universe": [0, 11, 1],
-          "fuzzy_values": ["short, medium", "long"]
+          "fuzzy_values": ["short", "medium", "long"]
       },
       "driving": {
           "crisp_universe": [0, 11, 1],

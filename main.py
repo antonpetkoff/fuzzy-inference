@@ -3,7 +3,20 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
 
+import json
+from inference import InferenceSystem
+
+
 def main():
+    with open('definitions_single.json') as definitions_json:
+        definitions = json.load(definitions_json)
+
+    inference_system = InferenceSystem(definitions)
+
+    print(inference_system)
+
+
+def tipping_problem_example():
     quality = ctrl.Antecedent(universe=np.arange(0, 11, 1), label='quality')
     service = ctrl.Antecedent(universe=np.arange(0, 11, 1), label='service')
     tip = ctrl.Consequent(universe=np.arange(0, 26, 1), label='tip')
@@ -53,8 +66,8 @@ def main():
     tipping.compute()
 
     # Mamdani 3 step inferente: aggregation, activation, accumulation
-    tipping.compute_rule(rule1)
-    tipping.print_state()
+    # tipping.compute_rule(rule1)
+    # tipping.print_state()
 
     # print computed output for tip
     print(tipping.output['tip'])

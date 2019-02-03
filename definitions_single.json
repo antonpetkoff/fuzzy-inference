@@ -1,0 +1,48 @@
+{
+  "variables": {
+      "journey_time": {
+          "crisp_universe": [0, 11, 1],
+          "fuzzy_values": ["short, medium", "long"]
+      },
+      "driving": {
+          "crisp_universe": [0, 11, 1],
+          "fuzzy_values": ["bad", "average", "good"]
+      },
+      "tip": {
+          "crisp_universe": [0, 26, 1],
+          "fuzzy_values": ["small", "medium", "big"]
+      }
+  },
+  "rules": [{
+      "if": [
+          [
+              ["driving", "good"]
+          ],
+          [
+              ["journey_time", "short"]
+          ]
+      ],
+      "then": ["tip", "big"]
+  }, {
+      "if": [
+          [
+              ["driving", "good"],
+              ["driving", "average"]
+          ],
+          [
+              ["journey_time", "medium"]
+          ]
+      ],
+      "then": ["tip", "moderate"]
+  }, {
+      "if": [
+          [
+              ["driving", "bad"]
+          ],
+          [
+              ["journey_time", "long"]
+          ]
+      ],
+      "then": ["tip", "small"]
+  }]
+}

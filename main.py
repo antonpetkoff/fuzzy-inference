@@ -26,9 +26,12 @@ def test_inference_graph():
     inference_graph = InferenceGraph(definitions)
     print('required inputs: {}'.format(inference_graph.get_required_inputs()))
 
-    inference_graph.evaluate(inputs={
-        'comfort': 3.4
+    result = inference_graph.evaluate(inputs={
+        'comfort': 3.4,
+        'journey_time': 1.3,
+        'average_speed': 61
     })
+    print('result: {}'.format(result))
 
     # TODO: evaluate
     # TODO: visualize results

@@ -8,6 +8,9 @@ class InferenceGraph:
         self.dependency_graph = InferenceGraph.__build_dependency_graph(self.definitions)
         print('dependency_graph: {}'.format(self.dependency_graph))
 
+        # TODO: find root variables
+        self.root_variable_names = ['tip']   # TODO: MOCKED
+
         self.consequent_variable_names = {
             variable_name
             for variable_name, children in self.dependency_graph.items()
@@ -32,12 +35,26 @@ class InferenceGraph:
                 set(inputs.keys())
             ))
 
-        environment = {}
-        environment.update(inputs)
+        self.environment = {}
+        self.environment.update(inputs)
 
-        # TODO:
-        systems_in_post_order = []
-        return {}
+        def evaluate_variable(variable):
+            if not variable in self.environment:
+                system = self.systems[variable]
+                inputs = {
+                    input_name: evaluate_variable(input_name)
+                    for input_name in system.get_required_inputs()
+                }
+                # get only the output for the target variable
+                output = system.evaluate(inputs)[variable]
+                self.environment[variable] = output
+
+            return self.environment[variable]
+
+        return {
+            variable: evaluate_variable(variable)
+            for variable in self.root_variable_names
+        }
 
 
     def get_required_inputs(self):

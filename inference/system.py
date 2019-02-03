@@ -37,7 +37,8 @@ class InferenceSystem:
 
 
     def visualize_result(self):
-        self.variables['tip'].view(sim=self.simulation)
+        for name in self.variables:
+            self.variables[name].view(sim=self.simulation)
         input('Press ENTER to hide result visualization')
 
 

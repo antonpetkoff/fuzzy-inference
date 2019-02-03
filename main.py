@@ -12,8 +12,11 @@ def main():
         definitions = json.load(definitions_json)
 
     inference_system = InferenceSystem(definitions)
-
-    print(inference_system)
+    result = inference_system.evaluate({
+        'driving': 9.8,
+        'journey_time': 2,
+    })
+    print('result: {}'.format(result))
 
 
 def tipping_problem_example():

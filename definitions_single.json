@@ -30,7 +30,7 @@
               ["driving", "average"]
           ],
           [
-              ["journey_time", "medium"]
+              ["journey_time", "long"]
           ]
       ],
       "then": ["tip", "moderate"]

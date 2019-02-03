@@ -23,6 +23,14 @@ class InferenceSystem:
         self.system = ctrl.ControlSystem(rules=self.rules)
 
 
+    def evaluate(self, inputs: object):
+        simulation = ctrl.ControlSystemSimulation(self.system)
+        simulation.inputs(inputs)
+        simulation.compute()
+        # TODO: defuzzify
+        return simulation.output
+
+
     @staticmethod
     def __get_consequent_variable_names(definitions):
         consequent_variable_names = set()

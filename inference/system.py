@@ -7,6 +7,9 @@ class InferenceSystem:
     def __init__(self, definitions):
         self.definitions = definitions
 
+        consequent_variable_names = InferenceSystem.__get_consequent_variable_names(self.definitions)
+        print('consequent_variable_names: {}'.format(consequent_variable_names))
+
         self.variables = InferenceSystem.__define_variables(self.definitions)
         print('variables: {}'.format(self.variables))
 
@@ -14,6 +17,17 @@ class InferenceSystem:
         print('rules: {}'.format(self.rules))
 
         self.system = ctrl.ControlSystem(rules=self.rules)
+
+
+    @staticmethod
+    def __get_consequent_variable_names(definitions):
+        consequent_variable_names = set()
+
+        for rule in definitions['rules']:
+            consequent_name, _ = rule['then']
+            consequent_variable_names.add(consequent_name)
+
+        return consequent_variable_names
 
 
     @staticmethod

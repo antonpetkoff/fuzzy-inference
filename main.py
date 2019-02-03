@@ -10,13 +10,13 @@ def main():
         definitions = json.load(definitions_json)
 
     inference_system = InferenceSystem(definitions)
-    inference_system.visualize_rules()
+    # inference_system.visualize_rules()
     result = inference_system.evaluate({
         'driving': 9.8,
         'journey_time': 2,
     })
     print('result: {}'.format(result))
-    inference_system.visualize_result()
+    # inference_system.visualize_result()
 
 
 if __name__ == "__main__":

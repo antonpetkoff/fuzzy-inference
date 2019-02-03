@@ -8,11 +8,11 @@ class InferenceGraph:
         self.dependency_graph = InferenceGraph.__build_dependency_graph(self.definitions)
         print('dependency_graph: {}'.format(self.dependency_graph))
 
-        self.consequent_variable_names = [
+        self.consequent_variable_names = {
             variable_name
             for variable_name, children in self.dependency_graph.items()
             if len(children) > 0
-        ]
+        }
 
         print('consequent_variable_names: {}'.format(self.consequent_variable_names))
 
@@ -31,6 +31,14 @@ class InferenceGraph:
         # TODO:
         systems_in_post_order = []
         return {}
+
+
+    def get_required_inputs(self):
+        children_inputs = set(flatten([
+            system.get_required_inputs()
+            for _, system in self.systems.items()
+        ]))
+        return children_inputs.difference(self.consequent_variable_names)
 
 
     @staticmethod

@@ -24,6 +24,7 @@ def test_inference_graph():
         definitions = json.load(definitions_json)
 
     inference_graph = InferenceGraph(definitions)
+    print('required inputs: {}'.format(inference_graph.get_required_inputs()))
     # TODO: evaluate
     # TODO: visualize results
 

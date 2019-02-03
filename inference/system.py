@@ -10,7 +10,10 @@ class InferenceSystem:
         consequent_variable_names = InferenceSystem.__get_consequent_variable_names(self.definitions)
         print('consequent_variable_names: {}'.format(consequent_variable_names))
 
-        self.variables = InferenceSystem.__define_variables(self.definitions)
+        self.variables = InferenceSystem.__define_variables(
+            definitions=self.definitions,
+            consequent_names=consequent_variable_names
+        )
         print('variables: {}'.format(self.variables))
 
         self.rules = InferenceSystem.__define_rules(self.definitions)
@@ -31,15 +34,16 @@ class InferenceSystem:
 
 
     @staticmethod
-    def __define_variables(definitions):
+    def __define_variables(definitions: object, consequent_names: set = set()):
         variables = {}
 
         for name, props in definitions['variables'].items():
-            print(name)
             universe = np.arange(*props['crisp_universe'])
-            print(universe)
-            # TODO: decide if the variable is an antecedent or a consequent
-            variables[name] = ctrl.Antecedent(
+
+            variables[name] = ctrl.Consequent(
+                universe=universe,
+                label=name
+            ) if name in consequent_names else ctrl.Antecedent(
                 universe=universe,
                 label=name
             )
@@ -55,7 +59,7 @@ class InferenceSystem:
         return variables
 
     @staticmethod
-    def __define_rules(definitions):
+    def __define_rules(definitions: object):
         rules = []
 
         return rules

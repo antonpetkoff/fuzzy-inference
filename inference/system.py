@@ -22,6 +22,7 @@ class InferenceSystem:
         print('rules: {}'.format(self.rules))
 
         self.system = ctrl.ControlSystem(rules=self.rules)
+        print()
 
 
     def get_required_inputs(self) -> list:

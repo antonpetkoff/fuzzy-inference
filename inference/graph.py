@@ -1,5 +1,5 @@
 from inference import InferenceSystem
-from inference.utils import get_consequent_variable_names, flatten
+from inference.utils import get_consequent_variable_names, flatten, get_root_variables
 
 class InferenceGraph:
     def __init__(self, definitions):
@@ -8,16 +8,14 @@ class InferenceGraph:
         self.dependency_graph = InferenceGraph.__build_dependency_graph(self.definitions)
         print('dependency_graph: {}'.format(self.dependency_graph))
 
-        # TODO: find root variables
-        self.root_variable_names = ['tip']   # TODO: MOCKED
-
-        self.consequent_variable_names = {
-            variable_name
-            for variable_name, children in self.dependency_graph.items()
-            if len(children) > 0
-        }
-
+        self.consequent_variable_names = get_consequent_variable_names(self.definitions)
         print('consequent_variable_names: {}'.format(self.consequent_variable_names))
+
+        self.root_variable_names = get_root_variables(
+            consequent_variable_names=self.consequent_variable_names,
+            dependency_graph=self.dependency_graph
+        )
+        print('root_variable_names: {}'.format(self.root_variable_names))
 
         self.systems = InferenceGraph.__build_systems(
             definitions=self.definitions,
@@ -25,6 +23,7 @@ class InferenceGraph:
             consequent_variable_names=self.consequent_variable_names
         )
         print('systems: {}'.format(self.systems))
+        print()
 
 
     def evaluate(self, inputs):

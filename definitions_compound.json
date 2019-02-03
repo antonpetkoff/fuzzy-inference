@@ -24,7 +24,7 @@
   "rules": [{
       "if": [
           [
-              ["average_speed", "high"]
+              ["average_speed", "fast"]
           ],
           [
               ["comfort", "high"], ["comfort", "medium"]

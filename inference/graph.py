@@ -1,5 +1,5 @@
-from inference.system import InferenceSystem
-from inference.utils import get_consequent_variable_names
+from inference import InferenceSystem
+from inference.utils import get_consequent_variable_names, flatten
 
 class InferenceGraph:
     def __init__(self, definitions):
@@ -16,7 +16,16 @@ class InferenceGraph:
     def __build_dependency_graph(definitions):
         adjacency_list = {}
 
-        for variable_name, props in definitions['variables'].items():
-            adjacency_list[variable_name] = []
+        for variable_name in definitions['variables']:
+            adjacency_list[variable_name] = set()
+
+        for rule in definitions['rules']:
+            consequent_name, _ = rule['then']
+            antecedents = set(map(lambda clause: clause[0], flatten(rule['if'])))
+
+            print('{} => {}'.format(antecedents, consequent_name))
+
+            for variable_name in antecedents:
+                adjacency_list[consequent_name].add(variable_name)
 
         return adjacency_list

@@ -25,6 +25,13 @@ class InferenceGraph:
 
 
     def evaluate(self, inputs):
+        required_inputs = self.get_required_inputs()
+        if set(inputs.keys()) != required_inputs:
+            raise ValueError('required inputs: {}; given: {}'.format(
+                required_inputs,
+                set(inputs.keys())
+            ))
+
         environment = {}
         environment.update(inputs)
 

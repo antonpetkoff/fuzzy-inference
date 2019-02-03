@@ -2,7 +2,7 @@
 
 import json
 import numpy as np
-from inference import InferenceSystem
+from inference import InferenceSystem, InferenceGraph
 
 
 def main():
@@ -17,6 +17,8 @@ def main():
     })
     print('result: {}'.format(result))
     # inference_system.visualize_result()
+
+    inference_graph = InferenceGraph(definitions)
 
 
 if __name__ == "__main__":

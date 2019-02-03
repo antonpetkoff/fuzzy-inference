@@ -24,11 +24,21 @@ class InferenceSystem:
 
 
     def evaluate(self, inputs: object):
-        simulation = ctrl.ControlSystemSimulation(self.system)
-        simulation.inputs(inputs)
-        simulation.compute()
+        self.simulation = ctrl.ControlSystemSimulation(self.system)
+        self.simulation.inputs(inputs)
+        self.simulation.compute()
         # TODO: defuzzify
-        return simulation.output
+        return self.simulation.output
+
+
+    def visualize_rules(self):
+        self.system.view_n()
+        input('Press ENTER to hide rule visualization')
+
+
+    def visualize_result(self):
+        self.variables['tip'].view(sim=self.simulation)
+        input('Press ENTER to hide result visualization')
 
 
     @staticmethod

@@ -1,3 +1,4 @@
+from inference import InferenceSystem
 
 class InferenceGraph:
     def __init__(self, definitions):

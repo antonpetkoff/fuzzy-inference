@@ -3,12 +3,13 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
 from functools import reduce
+from inference.utils import get_consequent_variable_names
 
 class InferenceSystem:
     def __init__(self, definitions):
         self.definitions = definitions
 
-        consequent_variable_names = InferenceSystem.__get_consequent_variable_names(self.definitions)
+        consequent_variable_names = get_consequent_variable_names(self.definitions)
         print('consequent_variable_names: {}'.format(consequent_variable_names))
 
         self.variables = InferenceSystem.__define_variables(
@@ -40,17 +41,6 @@ class InferenceSystem:
         for name in self.variables:
             self.variables[name].view(sim=self.simulation)
         input('Press ENTER to hide result visualization')
-
-
-    @staticmethod
-    def __get_consequent_variable_names(definitions):
-        consequent_variable_names = set()
-
-        for rule in definitions['rules']:
-            consequent_name, _ = rule['then']
-            consequent_variable_names.add(consequent_name)
-
-        return consequent_variable_names
 
 
     @staticmethod

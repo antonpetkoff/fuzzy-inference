@@ -24,7 +24,16 @@ class InferenceSystem:
         self.system = ctrl.ControlSystem(rules=self.rules)
 
 
+    def get_required_inputs(self) -> list:
+        return set(map(lambda antecedent: antecedent.label, self.system.antecedents))
+
+
     def evaluate(self, inputs: object):
+        required_inputs = self.get_required_inputs()
+        if set(inputs.keys()) != required_inputs:
+            print('required inputs: {}'.format(required_inputs))
+            print('given: {}'.format(inputs))
+
         self.simulation = ctrl.ControlSystemSimulation(self.system)
         self.simulation.inputs(inputs)
         self.simulation.compute()

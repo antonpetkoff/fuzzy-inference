@@ -18,7 +18,7 @@
       },
       "tip": {
           "crisp_universe": [0, 26, 1],
-          "fuzzy_values": ["small", "medium", "big"]
+          "fuzzy_values": ["small", "moderate", "big"]
       }
   },
   "rules": [{

@@ -2,6 +2,7 @@ import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
+from functools import reduce
 
 class InferenceSystem:
     def __init__(self, definitions):
@@ -16,7 +17,7 @@ class InferenceSystem:
         )
         print('variables: {}'.format(self.variables))
 
-        self.rules = InferenceSystem.__define_rules(self.definitions)
+        self.rules = InferenceSystem.__define_rules(self.definitions, self.variables)
         print('rules: {}'.format(self.rules))
 
         self.system = ctrl.ControlSystem(rules=self.rules)
@@ -59,7 +60,37 @@ class InferenceSystem:
         return variables
 
     @staticmethod
-    def __define_rules(definitions: object):
+    def __define_rules(definitions: object, variables: object):
         rules = []
+
+        for rule in definitions['rules']:
+
+            def reduce_or(disjunction):
+                def get_variable(expr):
+                    variable_name, variable_value = expr
+                    return variables[variable_name][variable_value]
+
+                return reduce(
+                    lambda a, b: a | b,
+                    map(get_variable, disjunction)
+                )
+
+            def reduce_and(conjunction):
+                return reduce(
+                    lambda a, b: a & b,
+                    map(reduce_or, conjunction)
+                )
+
+            # build a clause in conjunctive normal form
+            antecedent=reduce_and(conjunction=rule['if'])
+
+            consequent_name, consequent_value = rule['then']
+            consequent=variables[consequent_name][consequent_value]
+
+            rule = ctrl.Rule(
+                antecedent=antecedent,
+                consequent=consequent
+            )
+            rules.append(rule)
 
         return rules

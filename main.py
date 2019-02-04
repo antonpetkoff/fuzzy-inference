@@ -6,7 +6,7 @@ from inference import InferenceSystem, InferenceGraph
 
 
 def test_inference_system():
-    with open('definitions_single.json') as definitions_json:
+    with open('definitions/single.json') as definitions_json:
         definitions = json.load(definitions_json)
 
     inference_system = InferenceSystem(definitions)
@@ -20,7 +20,7 @@ def test_inference_system():
 
 
 def test_inference_graph():
-    with open('definitions_compound.json') as definitions_json:
+    with open('definitions/compound.json') as definitions_json:
         definitions = json.load(definitions_json)
 
     inference_graph = InferenceGraph(definitions)

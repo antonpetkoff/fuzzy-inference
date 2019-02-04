@@ -31,8 +31,8 @@ def test_inference_graph():
     })
     print('result: {}'.format(result))
 
-    # TODO: evaluate
-    # TODO: visualize results
+    inference_graph.visualize_result()
+    input('Press ENTER to hide result visualization')
 
 
 def main():

@@ -47,13 +47,13 @@ class InferenceSystem:
 
     def visualize_rules(self):
         self.system.view_n()
-        input('Press ENTER to hide rule visualization')
+        # input('Press ENTER to hide rule visualization')
 
 
     def visualize_result(self):
         for name in self.variables:
             self.variables[name].view(sim=self.simulation)
-        input('Press ENTER to hide result visualization')
+        # input('Press ENTER to hide result visualization')
 
 
     @staticmethod

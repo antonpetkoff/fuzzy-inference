@@ -64,6 +64,11 @@ class InferenceGraph:
         return children_inputs.difference(self.consequent_variable_names)
 
 
+    def visualize_result(self):
+        for system in self.systems.values():
+            system.visualize_result()
+
+
     @staticmethod
     def __build_systems(definitions, dependency_graph, consequent_variable_names):
         systems = {}

@@ -1,5 +1,3 @@
-# from tipping_problem_example import tipping_problem_example
-
 import json
 import numpy as np
 from inference import InferenceSystem, InferenceGraph

@@ -62,5 +62,10 @@
             ]
         ],
         "then": ["tip", "small"]
-    }]
+    }],
+    "inputs": {
+        "comfort": 3.4,
+        "journey_time": 1.3,
+        "average_speed": 61
+    }
 }

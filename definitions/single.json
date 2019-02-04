@@ -44,5 +44,9 @@
             ]
         ],
         "then": ["tip", "small"]
-    }]
+    }],
+    "inputs": {
+        "driving": 9.8,
+        "journey_time": 2
+    }
 }

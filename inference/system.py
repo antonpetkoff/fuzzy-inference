@@ -72,7 +72,6 @@ class InferenceSystem:
             )
 
             fuzzy_values = props['fuzzy_values']
-            print(fuzzy_values)
 
             variables[name].automf(
                 number=len(fuzzy_values),

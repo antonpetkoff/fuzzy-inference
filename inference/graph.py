@@ -106,8 +106,6 @@ class InferenceGraph:
             consequent_name, _ = rule['then']
             antecedents = set(map(lambda clause: clause[0], flatten(rule['if'])))
 
-            print('{} => {}'.format(antecedents, consequent_name))
-
             for variable_name in antecedents:
                 adjacency_list[consequent_name].add(variable_name)
 
